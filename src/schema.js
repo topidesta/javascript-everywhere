@@ -17,7 +17,7 @@ module.exports = gql`
     createdAt: DateTime!
     updatedAt: DateTime!
     favoritecount: Int!
-    favoriteBy: [User!]
+    favoritedBy: [User!]
   }
   type User {
     id: ID!
