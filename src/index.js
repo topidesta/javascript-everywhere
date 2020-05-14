@@ -2,10 +2,22 @@ const express = require("express");
 const { ApolloServer, gql } = require("apollo-server-express");
 const port = process.env.PORT || 4000;
 
+let notes = [
+  { id: "1", content: "The First Content", author: "Topidesta" },
+  { id: "2", content: "The Second Content", author: "Desta" },
+  { id: "3", content: "The Third Content", author: "Fadilah" },
+];
+
 // buat sebuah skema dengan GraphQL
 const typeDefs = gql`
   type Query {
-    hello: String
+    hello: String!
+    notes: [Note!]!
+  }
+  type Note {
+    id: ID!
+    content: String!
+    author: String!
   }
 `;
 
@@ -13,6 +25,7 @@ const typeDefs = gql`
 const resolvers = {
   Query: {
     hello: () => "Hello world",
+    notes: () => notes,
   },
 };
 
