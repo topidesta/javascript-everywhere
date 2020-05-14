@@ -1,6 +1,8 @@
 const express = require("express");
 const { ApolloServer, gql } = require("apollo-server-express");
 
+const typeDefs = require("./schema");
+
 require("dotenv").config();
 const db = require("./db");
 
@@ -15,23 +17,6 @@ let notes = [
   { id: "2", content: "The Second Content", author: "Desta" },
   { id: "3", content: "The Third Content", author: "Fadilah" },
 ];
-
-// buat sebuah skema dengan GraphQL
-const typeDefs = gql`
-  type Query {
-    hello: String!
-    notes: [Note!]!
-    note(id: ID!): Note!
-  }
-  type Note {
-    id: ID!
-    content: String!
-    author: String!
-  }
-  type Mutation {
-    newNote(content: String!): Note!
-  }
-`;
 
 // fungsi untuk menampilkan schema yang dibuat
 const resolvers = {
