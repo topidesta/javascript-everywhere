@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const mongoose = require("mongoose");
 
 const {
   AuthenticationError,
@@ -11,10 +12,14 @@ require("dotenv").config();
 const gravatar = require("../utils/gravatar");
 
 module.exports = {
-  newNote: async (parent, args, { models }) => {
+  newNote: async (parent, args, { models, user }) => {
+    if (!user) {
+      throw new AuthenticationError("Login Terlebih Dahulu!");
+    }
+
     return await models.Note.create({
       content: args.content,
-      author: "Desta Fadilah",
+      author: mongoose.Types.ObjectId(user.id),
     });
   },
   deleteNote: async (parent, { id }, { models }) => {
