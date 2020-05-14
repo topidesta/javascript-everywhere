@@ -1,35 +1,44 @@
 const express = require("express");
-const { ApolloServer, gql } = require("apollo-server-express");
+const { ApolloServer } = require("apollo-server-express");
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
-// load model
+const db = require("./db");
 const models = require("./models");
 const typeDefs = require("./schema");
 const resolvers = require("./resolvers");
 
-require("dotenv").config();
-const db = require("./db");
-
 const port = process.env.PORT || 4000;
 const DB_HOST = process.env.DB_HOST;
-
-let notes = [
-  { id: "1", content: "The First Content", author: "Topidesta" },
-  { id: "2", content: "The Second Content", author: "Desta" },
-  { id: "3", content: "The Third Content", author: "Fadilah" },
-];
 
 const app = express();
 
 // connect to database
 db.connect(DB_HOST);
 
+const getUser = (token) => {
+  if (token) {
+    try {
+      // return jwt token
+      return jwt.verify(token, process.env.JWT_SECRET);
+    } catch (err) {
+      throw new Error("Session Salah");
+    }
+  }
+};
+
 // setup server apollo
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: () => {
+  context: ({ req }) => {
+    // get token from headers
+    const token = req.headers.authorization;
+    // ambil token dari user
+    const user = getUser(token);
+    // console.log(user);
     // add db models
-    return { models };
+    return { models, user };
   },
 });
 
