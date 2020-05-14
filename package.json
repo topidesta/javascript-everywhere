@@ -11,6 +11,7 @@
     "url": "git@github.com:topidesta/javascript-everywhere.git"
   },
   "dependencies": {
+    "apollo-server-express": "^2.13.1",
     "express": "^4.17.1",
     "nodemon": "^2.0.3"
   }
