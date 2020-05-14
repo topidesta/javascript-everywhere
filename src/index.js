@@ -20,15 +20,6 @@ let notes = [
 
 // fungsi untuk menampilkan schema yang dibuat
 const resolvers = {
-  Query: {
-    hello: () => "Hello world",
-    notes: async () => {
-      return await models.Note.find();
-    },
-    note: async (parent, args) => {
-      return await models.Note.findById(args.id);
-    },
-  },
   Mutation: {
     newNote: async (parent, args) => {
       return await models.Note.create({
