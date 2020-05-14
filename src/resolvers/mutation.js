@@ -99,4 +99,43 @@ module.exports = {
     // buat dan return jwt
     return jwt.sign({ id: user._id }, process.env.JWT_SECRET);
   },
+  toggleFavorite: async (parent, { id }, { models, user }) => {
+    if (!user) {
+      throw new AuthenticationError();
+    }
+
+    // cek kalo sudah difavorite
+    let noteCheck = await models.Note.findById(id);
+    const hasUser = noteCheck.favoriteBy.indexOf(user.id);
+
+    // jika user ada dilist dan mulai hitung dalam list
+    if (hasUser >= 0) {
+      return await models.Note.findByIdAndUpdate(
+        id,
+        {
+          $pull: {
+            favoriteBy: mongoose.Types.ObjectId(user.id),
+          },
+          $inc: {
+            favoriteCount: -1,
+          },
+        },
+        { new: true }
+      );
+    } else {
+      // jika gak ada dilist, maka tambahkan dilist menjadi 1 hitungan favorite
+      return await models.Note.findByIdAndUpdate(
+        id,
+        {
+          $push: {
+            favoritedBy: mongoose.Types.ObjectId(user.id),
+          },
+          $inc: {
+            favoriteCount: 1,
+          },
+        },
+        { new: true }
+      );
+    }
+  },
 };

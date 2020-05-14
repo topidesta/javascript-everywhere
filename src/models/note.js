@@ -13,6 +13,13 @@ const noteSchema = new mongoose.Schema(
       required: true,
       ref: "User",
     },
+    favoriteCount: { type: Number, default: 0 },
+    favoriteBy: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
   },
   {
     // timestame created added
