@@ -54,5 +54,23 @@ module.exports = {
       throw new Error("Gagal Membuat Akun!");
     }
   },
-  signIn: () => {},
+  signIn: async (parent, { username, email, password }, { models }) => {
+    if (email) {
+      // biar gak alay
+      email = email.trim().toLowerCase();
+    }
+    const user = await models.User.findOne({ $or: [{ email }, { username }] });
+
+    if (!user) {
+      throw new AuthenticationError("Gagal Masuk");
+    }
+
+    // jika password tidak cocok munculin error
+    const valid = await bcrypt.compare(password, user.password);
+    if (!valid) {
+      throw new AuthenticationError("Password Salah");
+    }
+    // buat dan return jwt
+    return jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+  },
 };
