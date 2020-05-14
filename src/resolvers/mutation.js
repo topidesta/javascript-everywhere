@@ -23,14 +23,35 @@ module.exports = {
     });
   },
   deleteNote: async (parent, { id }, { models }) => {
+    if (!user) {
+      throw new AuthenticationError("Login Dahulu Sebelum Dihapus");
+    }
+    // cari note berdasarkan id
+    const note = await models.Note.findById(id);
+
+    // kalo catatan bukan punya dia sendiri, munculin error
+    if (note && String(note.author) !== user.id) {
+      throw new ForbiddenError("Akses menghapus anda salah");
+    }
+
     try {
-      await models.Note.findOneAndRemove({ _id: id });
+      await note.remove();
       return true;
     } catch (err) {
       return false;
     }
   },
-  updateNote: async (parent, { content, id }, { models }) => {
+  updateNote: async (parent, { content, id }, { models, user }) => {
+    if (!user) {
+      throw new AuthenticationError("Login Dahulu Sebelum Diubah");
+    }
+    // cari note berdasar id
+    const note = await models.Note.findById(id);
+
+    if (note && String(note.author) !== user.id) {
+      throw new ForbiddenError("Tidak punya akses untuk merubah");
+    }
+
     return await models.Note.findOneAndUpdate(
       { _id: id },
       { $set: { content } },
