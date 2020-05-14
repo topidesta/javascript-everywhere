@@ -51,7 +51,7 @@ module.exports = {
     } catch (err) {
       console.log(err);
       // kalo gagal buat akun, gagalkan!
-      throw new Error("Gagal Membuat Akun");
+      throw new Error("Gagal Membuat Akun!");
     }
   },
   signIn: () => {},
