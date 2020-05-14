@@ -45,14 +45,11 @@ const resolvers = {
     },
   },
   Mutation: {
-    newNote: (parent, args) => {
-      let noteValue = {
-        id: String(notes.length + 1),
+    newNote: async (parent, args) => {
+      return await models.Note.create({
         content: args.content,
-        author: "Desta Fadilah",
-      };
-      notes.push(noteValue);
-      return noteValue;
+        author: "Desta Fadilah Topidesta",
+      });
     },
   },
 };
