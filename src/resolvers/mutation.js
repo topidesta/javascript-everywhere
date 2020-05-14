@@ -20,4 +20,6 @@ module.exports = {
       { new: true }
     );
   },
+  signUp: () => {},
+  signIn: () => {},
 };
