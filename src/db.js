@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 module.exports = {
   connect: (DB_HOST) => {
     // Monggo driver
-    mongoose.set("userNewUrlParser", true);
+    mongoose.set("useNewUrlParser", true);
     // Use findOneAndUpdate() in place of findAndModify()
     mongoose.set("useFindAndModify", false);
     // Use createIndex() in place of ensureIndex()
