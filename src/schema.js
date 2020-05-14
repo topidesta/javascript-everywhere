@@ -16,13 +16,8 @@ module.exports = gql`
     author: String!
     createdAt: DateTime!
     updatedAt: DateTime!
-  }
-  type Mutation {
-    newNote(content: String!): Note!
-    updateNote(id: ID!, content: String!): Note!
-    deleteNote(id: ID!): Boolean!
-    signUp(username: String!, email: String!, password: String!): String!
-    signIn(username: String, email: String, password: String!): String!
+    favoritecount: Int!
+    favoriteBy: [User!]
   }
   type User {
     id: ID!
@@ -30,5 +25,14 @@ module.exports = gql`
     email: String!
     avatar: String!
     notes: [Note!]!
+    favorites: [Note!]!
+  }
+  type Mutation {
+    newNote(content: String!): Note!
+    updateNote(id: ID!, content: String!): Note!
+    deleteNote(id: ID!): Boolean!
+    signUp(username: String!, email: String!, password: String!): String!
+    signIn(username: String, email: String, password: String!): String!
+    toggleFavorite(id: ID!): Note!
   }
 `;
