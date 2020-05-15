@@ -11,9 +11,11 @@ const resolvers = require("./resolvers");
 const port = process.env.PORT || 4000;
 const DB_HOST = process.env.DB_HOST;
 const helmet = require("helmet");
+const cors = require("cors");
 
 const app = express();
 app.use(helmet());
+app.use(cors());
 
 // connect to database
 db.connect(DB_HOST);
