@@ -42,7 +42,7 @@ const server = new ApolloServer({
     // get token from headers
     const token = req.headers.authorization;
     // ambil token dari user
-    const user = await getUser(token);
+    const user = getUser(token);
     // console.log(user);
     // add db models
     return { models, user };
