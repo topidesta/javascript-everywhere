@@ -1,17 +1,40 @@
 {
   "name": "javascript-api",
   "version": "1.0.0",
-  "description": "API Example",
+  "description": "Web Example",
   "main": "src/index.js",
   "scripts": {
-    "dev": "nodemon src/index.js"
+    "start": "cross-env NODE_ENV=development parcel index.html --open",
+    "build": "cross-env NODE_ENV=production parcel build index.html --public-url ./",
+    "dev": "parcel index.html -p 8888"
   },
   "repository": {
     "type": "git",
     "url": "git@github.com:topidesta/javascript-everywhere.git"
   },
   "dependencies": {
-    "express": "^4.17.1",
-    "nodemon": "^2.0.3"
-  }
+    "acorn": "6.4.1",
+    "kind-of": "6.0.3",
+    "minimist": "1.2.3",
+    "parcel-bundler": "^1.12.4",
+    "public": "^0.1.5",
+    "react": "^16.6.0",
+    "react-dom": "^16.12.0",
+    "styled-components": "^5.1.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-latest": "^6.24.1",
+    "babel-preset-minify": "^0.2.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "cross-env": "^5.1.1",
+    "rimraf": "^2.6.2"
+  },
+  "browserslist": [
+    "last 1 Chrome versions"
+  ]
 }
