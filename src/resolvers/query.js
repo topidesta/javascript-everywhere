@@ -14,4 +14,29 @@ module.exports = {
   me: async (parent, args, { models, user }) => {
     return await models.User.findById(user.id);
   },
+  noteFeed: async (parent, { cursor }, { models }) => {
+    const limit = 10;
+    let hasNextPage = false;
+    let cursorQuery = {};
+
+    if (cursor) {
+      cursorQuery = { _id: { $lt: cursor } };
+    }
+
+    // cari limit ditambahkan 1 di db lalu diurutkan baru kelama
+    let notes = await models.Note.find(cursorQuery)
+      .sort({ _id: -1 })
+      .limit(limit + 1);
+
+    // set hasNextPage kalo benar dan potong bagian catatnnya
+    if (notes.length > limit) {
+      hasNextPage = true;
+      notes = notes.slice(0, -1);
+    }
+
+    // cursor akan menjadi feeder array setiap object ID dimonggo
+    const newCursor = notes[notes.length - 1]._id;
+
+    return { notes, cursor: newCursor, hasNextPage };
+  },
 };
