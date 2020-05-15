@@ -12,6 +12,8 @@ const port = process.env.PORT || 4000;
 const DB_HOST = process.env.DB_HOST;
 const helmet = require("helmet");
 const cors = require("cors");
+const depthLimit = require("graphql-depth-limit");
+const { createComplexityLimitRule } = require("graphql-validation-complexity");
 
 const app = express();
 app.use(helmet());
@@ -35,11 +37,12 @@ const getUser = (token) => {
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  validationRules: [depthLimit(5), createComplexityLimitRule(1000)],
   context: ({ req }) => {
     // get token from headers
     const token = req.headers.authorization;
     // ambil token dari user
-    const user = getUser(token);
+    const user = await getUser(token);
     // console.log(user);
     // add db models
     return { models, user };
