@@ -10,8 +10,10 @@ const resolvers = require("./resolvers");
 
 const port = process.env.PORT || 4000;
 const DB_HOST = process.env.DB_HOST;
+const helmet = require("helmet");
 
 const app = express();
+app.use(helmet());
 
 // connect to database
 db.connect(DB_HOST);
