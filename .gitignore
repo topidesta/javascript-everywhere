@@ -62,7 +62,5 @@ typings/
 
 # VSCode settings
 .vscode/
-
-./cache
-
 .cache
+/dist
