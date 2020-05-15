@@ -1,7 +1,5 @@
-import React, { Component } from "react";
+import React from "react";
 
-export default class favorites extends Component {
-  render() {
-    return <div>Halaman Favorite</div>;
-  }
+export default function favorites() {
+  return <div>Favorite</div>;
 }

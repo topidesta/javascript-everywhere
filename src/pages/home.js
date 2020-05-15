@@ -1,7 +1,5 @@
-import React, { Component } from "react";
+import React from "react";
 
-export default class home extends Component {
-  render() {
-    return <div>Halaman Home</div>;
-  }
+export default function home() {
+  return <div>Home</div>;
 }
