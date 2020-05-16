@@ -1,5 +1,17 @@
 import React from "react";
 
-export default function home() {
-  return <div>Home</div>;
-}
+// Komponen
+import Header from "../components/Header";
+import Navigation from "../components/Navigation";
+
+const Home = () => {
+  return (
+    <div>
+      <Header />
+      <Navigation />
+      <p>Halaman Home</p>
+    </div>
+  );
+};
+
+export default Home;
