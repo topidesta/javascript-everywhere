@@ -1,15 +1,11 @@
 import React from "react";
-
-// Komponen
-import Header from "../components/Header";
-import Navigation from "../components/Navigation";
+import Button from "../components/Button";
 
 const Home = () => {
   return (
     <div>
-      <Header />
-      <Navigation />
       <p>Halaman Home</p>
+      <Button>Click me!</Button>
     </div>
   );
 };
