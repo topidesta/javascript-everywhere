@@ -16,6 +16,7 @@
     "acorn": "6.4.1",
     "kind-of": "6.0.3",
     "minimist": "1.2.3",
+    "normalize.css": "^8.0.1",
     "parcel-bundler": "^1.12.4",
     "public": "^0.1.5",
     "react": "^16.6.0",
