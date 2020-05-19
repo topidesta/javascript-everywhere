@@ -13,6 +13,7 @@
     "url": "git@github.com:topidesta/javascript-everywhere.git"
   },
   "dependencies": {
+    "@apollo/client": "^3.0.0-beta.49",
     "acorn": "6.4.1",
     "kind-of": "6.0.3",
     "minimist": "1.2.3",
