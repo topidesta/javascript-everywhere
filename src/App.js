@@ -3,13 +3,24 @@ import Pages from "./pages";
 
 // global styled
 import GlobalStyles from "./components/GlobalStyle";
+import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+
+const uri = process.env.API_URI;
+const cache = new InMemoryCache();
+
+// config applo clinet
+const client = new ApolloClient({
+  uri,
+  cache,
+  connectToDevTools: true,
+});
 
 const App = () => {
   return (
-    <div>
+    <ApolloProvider client={client}>
       <GlobalStyles />
       <Pages />
-    </div>
+    </ApolloProvider>
   );
 };
 
