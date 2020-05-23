@@ -1,5 +1,4 @@
 import React from "react";
-import Button from "../components/Button";
 
 // libraries
 import { useQuery, gql } from "@apollo/client";
@@ -33,9 +32,9 @@ const Home = () => {
 
   return (
     <div>
-      <p>Halaman Home</p>
-      {console.log(data)}
-      <Button>Click me!</Button>
+      {data.noteFeed.notes.map((note) => (
+        <div key={note.id}>{note.content}</div>
+      ))}
     </div>
   );
 };
