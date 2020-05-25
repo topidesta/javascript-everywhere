@@ -4,7 +4,15 @@ import ReactMarkdown from "react-markdown";
 const Note = ({ note }) => {
   return (
     <article>
-      <img src={note.author.avatar} alt="244" />
+      <img
+        src={note.author.avatar}
+        alt="{note.author.username} avatar"
+        height="50px"
+      />{" "}
+      {note.author.username} {note.createdAt}{" "}
+      <ReactMarkdown source={note.content} />
     </article>
   );
 };
+
+export default Note;

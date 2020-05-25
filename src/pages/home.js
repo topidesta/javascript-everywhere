@@ -1,5 +1,5 @@
 import React from "react";
-import ReactMarkdown from "react-markdown";
+import NoteFeed from "../components/NoteFeed";
 
 // libraries
 import { useQuery, gql } from "@apollo/client";
@@ -36,21 +36,7 @@ const Home = () => {
   // jika error fetching data, tampilkan pasan error
   if (error) return <p>Error...</p>;
 
-  return (
-    <div>
-      {data.noteFeed.notes.map((note) => (
-        <article key={note.id}>
-          <img
-            src={note.author.avatar}
-            alt={`${note.author.username} avatar`}
-            height="50px"
-          />{" "}
-          {note.author.username} {note.createdAt}{" "}
-          <ReactMarkdown source={note.content} />
-        </article>
-      ))}
-    </div>
-  );
+  return <NoteFeed notes={data.noteFeed.notes} />;
 };
 
 export default Home;
