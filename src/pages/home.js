@@ -1,4 +1,5 @@
 import React from "react";
+import ReactMarkdown from "react-markdown";
 
 // libraries
 import { useQuery, gql } from "@apollo/client";
@@ -14,6 +15,11 @@ const GET_NOTES = gql`
         content
         favoritedBy {
           id
+        }
+        author {
+          username
+          id
+          avatar
         }
       }
     }
@@ -33,7 +39,15 @@ const Home = () => {
   return (
     <div>
       {data.noteFeed.notes.map((note) => (
-        <div key={note.id}>{note.content}</div>
+        <article key={note.id}>
+          <img
+            src={note.author.avatar}
+            alt={`${note.author.username} avatar`}
+            height="50px"
+          />{" "}
+          {note.author.username} {note.createdAt}{" "}
+          <ReactMarkdown source={note.content} />
+        </article>
       ))}
     </div>
   );
