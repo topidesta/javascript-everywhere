@@ -5,6 +5,7 @@ import Pages from "./pages";
 import GlobalStyles from "./components/GlobalStyle";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 
+// const uri = `http://localhost:4000/api`;
 const uri = process.env.API_URI;
 const cache = new InMemoryCache();
 
